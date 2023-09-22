@@ -1,0 +1,5 @@
+<div class="keyboard-cont">
+    <div *ngFor="let key of keys" class="keyboard-btn-cont">
+        <app-key-button [stopped]="stopped" [keyVal]="key" (keySelect)="selectKey($event)"></app-key-button>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+.hangman-gr {
+    display: grid;
+    grid-template-areas: 
+    'notice notice notice'
+    'topleft topright topright'
+    'bottom bottom bottom';
+    gap: 10px;
+    padding: 10px;
+    background-color: #505050;
+    max-width: 600px;
+}
+
+.hangman-gr > div {
+}
+
+.hangman-tl { 
+    background-color: #fff;
+    grid-area: topleft;
+}
+
+.hangman-tr {
+    background-color: #eee;
+    grid-area: topright;
+}
+
+.hangman-b {
+    background-color: #eee;
+    grid-area: bottom;
+}
+
+.hangman-n {
+    padding: 4px 8px;
+    grid-area: notice;
+    background-color: #eee;
+}
+
+.hangman-n > span {
+    padding: 4px 8px;
+}
+
+.hangman-n-win {
+    padding: 4px 8px;
+    grid-area: notice;
+    background-color: #acff93;
+    color: #114900;
+    border: 1px solid #114900;
+}
+
+.hangman-n-lose {
+    padding: 4px 8px;
+    grid-area: notice;
+    background-color: #ff9393;
+    color: #490000;
+    border: 1px solid #490000;
+}
+
+#hangman-newgame {
+    float: right;
+}
