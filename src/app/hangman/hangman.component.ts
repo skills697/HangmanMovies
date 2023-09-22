@@ -13,6 +13,7 @@ export class HangmanComponent implements OnInit, InitGameEvent {
 
   person = new HangmanPersonComponent();
   guessesRemaining = 0;
+  gameCounter = 0;
   displaying = "";
   notice = "";
   stopped = false;
@@ -52,6 +53,7 @@ export class HangmanComponent implements OnInit, InitGameEvent {
     this.displaying = this.hangmanController.getDisplaying();
     this.stopped = false;
     this.win = false;
+    this.gameCounter++;
     this.notice = "Remaining: " + this.guessesRemaining;
   }
 }

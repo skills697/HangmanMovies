@@ -10,6 +10,7 @@ export class KeyboardComponent {
   
   @Output() doGuess = new EventEmitter<string>();
   @Input() stopped = false;
+  @Input() gameCounter = 0;
   keys = this.keyMappingService.getRemaining();
 
   constructor(

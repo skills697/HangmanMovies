@@ -20,6 +20,7 @@ export class HangmanControllerService {
       console.log("RESPONSE:");
       console.log(resp);
       this.setTitle(resp);
+      this.guessesRemaining = 6;
       gameInitHandler.onGameInit();
     });
   }

@@ -3,11 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "dev": "ng build && npx tsc && node --es-module-specifier-resolution=node dist/out-tsc/server.js"
+    "serve": "ng build && npx tsc && node --es-module-specifier-resolution=node dist/out-tsc/server.js"
   },
   "private": true,
   "dependencies": {
