@@ -6,5 +6,5 @@
     </div>
     <div class="hangman-tl"><app-hangman-person [guessesRemaining]="guessesRemaining"></app-hangman-person></div>
     <div class="hangman-tr"><app-hangman-board [displayText]="displaying"></app-hangman-board></div>
-    <div class="hangman-b"><app-keyboard [stopped]="stopped" (doGuess)="handleGuess($event)"></app-keyboard></div>
+    <div class="hangman-b"><app-keyboard [stopped]="stopped" [gameCounter]="gameCounter" (doGuess)="handleGuess($event)"></app-keyboard></div>
 </div>
