@@ -42,4 +42,6 @@ testem.log
 Thumbs.db
 
 # SQLite DB
+/*.db
+*.db
 movies.db
