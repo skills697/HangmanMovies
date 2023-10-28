@@ -1,9 +1,15 @@
-import { Component, Input, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, AfterViewInit, inject } from '@angular/core';
+import { HangmanControllerService } from '../hangman-controller.service';
 
 @Component({
   selector: 'app-hangman-person',
   templateUrl: './hangman-person.component.html',
-  styleUrls: ['./hangman-person.component.scss']
+  styles: [`
+    #hangman-person {
+        display: flex;
+        justify-content: center;
+    }
+  `]
 })
 export class HangmanPersonComponent implements OnChanges, AfterViewInit {
   
@@ -15,6 +21,9 @@ export class HangmanPersonComponent implements OnChanges, AfterViewInit {
   private leftLeg: HTMLElement | undefined;
   private failTries = [false, false, false, false, false, false];
   @Input() guessesRemaining: number | undefined;
+
+  hs = inject(HangmanControllerService);
+  
 
   constructor(
   ){ }

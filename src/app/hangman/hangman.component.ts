@@ -1,59 +1,43 @@
-import { Component, OnInit } from '@angular/core';
-import { KeyboardComponent } from '../keyboard/keyboard.component';
-import { KeyMappingService } from '../key-mapping.service';
-import { HangmanPersonComponent } from '../hangman-person/hangman-person.component';
-import { HangmanControllerService, InitGameEvent } from '../hangman-controller.service';
+import { Component, OnInit, inject } from '@angular/core';
+import { HangmanControllerService} from '../hangman-controller.service';
 
 @Component({
   selector: 'app-hangman',
-  templateUrl: './hangman.component.html',
-  styleUrls: ['./hangman.component.scss']
+  styleUrls: ['./hangman.component.scss'],
+  template: `
+  <h2>Hangman Game</h2>
+  <div class="hangman-gr">
+      <div [ngClass]="{'hangman-n-win': this.hs.victory(), 'hangman-n-lose': !this.hs.victory() && this.hs.ended() , 'hangman-n': !this.hs.ended()}">
+          <span>{{displayNotice()}}</span>
+          <button id="hangman-newgame" (click)="resetGame()">New Game</button>
+      </div>
+      <div class="hangman-tl"><app-hangman-person [guessesRemaining]="this.hs.guessesRemaining()"></app-hangman-person></div>
+      <div class="hangman-tr"><app-hangman-board></app-hangman-board></div>
+      <div class="hangman-b"><app-keyboard></app-keyboard></div>
+  </div>
+  `
 })
-export class HangmanComponent implements OnInit, InitGameEvent {
+export class HangmanComponent implements OnInit {
 
-  person = new HangmanPersonComponent();
-  guessesRemaining = 0;
-  gameCounter = 0;
-  displaying = "";
-  notice = "";
-  stopped = false;
-  win = false;
+  hs = inject(HangmanControllerService);
   
-  constructor(
-    private keyMapService: KeyMappingService,
-    private hangmanController: HangmanControllerService
-  ){ }
+  constructor(){ }
   
   ngOnInit(): void {
-    this.hangmanController.newGame(this);
+    this.hs.newGame$.next(0);
   }
 
   resetGame(){
-    this.hangmanController.newGame(this);
+    this.hs.newGame$.next(0);
   }
   
-  handleGuess(inputLetter: string): boolean {
-    const res = this.hangmanController.guessLetter(inputLetter);
-    this.guessesRemaining = this.hangmanController.getGuessesRemaining();
-    this.displaying = this.hangmanController.getDisplaying();
-    this.win = this.hangmanController.getWin();
-    if(this.guessesRemaining <= 0 || this.win) {
-      this.stopped = true;
-      this.notice = (this.win) ? "You have won!" : "No remaining tries: \"" + this.hangmanController.getTitle() + "\"";
+  displayNotice(){
+    var res = "Tries Remaining: " + this.hs.guessesRemaining();
+    if(this.hs.victory()) {
+      res = "You have won!"
+    } else if (this.hs.ended()){
+      res = "No Remaining Tries"
     }
-    else
-    {
-      this.notice = "Remaining: " + this.guessesRemaining;
-    }
-    return false;
-  }
-
-  onGameInit(): void {
-    this.guessesRemaining = this.hangmanController.getGuessesRemaining();
-    this.displaying = this.hangmanController.getDisplaying();
-    this.stopped = false;
-    this.win = false;
-    this.gameCounter++;
-    this.notice = "Remaining: " + this.guessesRemaining;
+    return res;
   }
 }

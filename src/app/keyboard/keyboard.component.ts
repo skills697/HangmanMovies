@@ -1,23 +1,27 @@
-import { Component, Input, Output, EventEmitter} from '@angular/core';
-import { KeyMappingService } from '../key-mapping.service';
+import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
+import { Key, KeyPress } from '../keys';
+import { HangmanControllerService } from '../hangman-controller.service';
 
 @Component({
   selector: 'app-keyboard',
-  templateUrl: './keyboard.component.html',
-  styleUrls: ['./keyboard.component.scss']
+  styleUrls: ['./keyboard.component.scss'],
+  template:`
+  <div class="keyboard-cont">
+      <div *ngFor="let key of hs.keys()" class="keyboard-btn-cont">
+          <button (click)="selectKey(key.id)" [disabled]="key.pressed || hs.ended()" class="keyboard-btn">{{ key.id }}</button>
+      </div>
+  </div>
+  `
 })
+
+
 export class KeyboardComponent {
   
-  @Output() doGuess = new EventEmitter<string>();
-  @Input() stopped = false;
-  @Input() gameCounter = 0;
-  keys = this.keyMappingService.getRemaining();
+  hs = inject(HangmanControllerService);
 
-  constructor(
-    private keyMappingService: KeyMappingService
-  ) { }
+  constructor() { }
   
-  selectKey(keyEvent: string){
-    this.doGuess.emit(keyEvent);
+  selectKey(keyId: string){
+    this.hs.keyPress$.next({id: keyId});
   }
 }

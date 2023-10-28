@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { KeyboardComponent } from './keyboard/keyboard.component';
 import { HangmanComponent } from './hangman/hangman.component';
-import { KeyButtonComponent } from './key-button/key-button.component';
 import { HangmanPersonComponent } from './hangman-person/hangman-person.component';
 import { HangmanBoardComponent } from './hangman-board/hangman-board.component';
 
@@ -15,7 +14,6 @@ import { HangmanBoardComponent } from './hangman-board/hangman-board.component';
     AppComponent,
     KeyboardComponent,
     HangmanComponent,
-    KeyButtonComponent,
     HangmanPersonComponent,
     HangmanBoardComponent
   ],
