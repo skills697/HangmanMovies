@@ -110,7 +110,7 @@ class HangmanLetter {
 
   constructor(inputCharacter: string){
     this.character = inputCharacter;
-    this.display = (inputCharacter == ' ' || inputCharacter == '\n') ? true : false;
+    this.display = (KeyboardKeys.indexOf(inputCharacter.toLowerCase()) < 0) ? true : false;
   }
   
   checkCharacter(inputCharacter: string): boolean {

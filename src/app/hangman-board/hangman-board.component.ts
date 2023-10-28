@@ -17,11 +17,10 @@ import { HangmanControllerService } from '../hangman-controller.service';
     }
 
     .hangman-disp-space {
-        min-height: 18px;
-        min-width: 8px;
-        margin: 3px;
-        padding: 3px 4px;
-        float: left;
+        clear: both;
+        position: relative;
+        display: block;
+        min-height: 1px;
     }
 
     .hangman-disp-letter {
